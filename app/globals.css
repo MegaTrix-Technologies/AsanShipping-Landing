@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 97%;              /* clean crisp off-white paper #f8fafc */
+    --foreground: 222 47% 11%;              /* deep rich obsidian slate #0f172a */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --card-elevated: 0 0% 100%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 158 64% 28%;                 /* bold rich deep emerald #10b981 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 20% 93%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 20% 93%;
+    --muted-foreground: 215 25% 32%;        /* sharp dark slate text #334155 */
+
+    --accent: 150 30% 92%;
+    --accent-foreground: 158 64% 20%;
+
+    --destructive: 8 78% 52%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 60% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 42%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 214 25% 82%;                  /* crisp defined border lines */
+    --input: 214 25% 82%;
+    --ring: 158 64% 28%;
+
+    --radius: 0.875rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;             /* pitch dark obsidian #09090b */
+    --foreground: 0 0% 98%;                 /* high contrast crisp white #fafafa */
+
+    --card: 240 10% 6.5%;                   /* distinct dark card surface #101014 */
+    --card-foreground: 0 0% 98%;
+    --card-elevated: 240 10% 9.5%;
+
+    --popover: 240 10% 6.5%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 158 64% 34%;                 /* deep refined emerald */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 6% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 6% 12%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 6% 14%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 0 0% 98%;
+
+    --success: 152 60% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --warning: 38 92% 42%;
+    --warning-foreground: 0 0% 100%;
+
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 158 64% 34%;
+  }
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/* Accent color for native sliders & form inputs following primary green */
+input[type="range"] {
+  accent-color: hsl(var(--primary));
+}
+
+::selection {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Custom scrollbar for modern browsers */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}

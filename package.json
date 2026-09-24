@@ -1,0 +1,35 @@
+{
+  "name": "asanshipping-website",
+  "version": "1.0.0",
+  "description": "AsanShipping Official Public Marketing Website & SEO Articles Hub",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3001",
+    "build": "next build",
+    "start": "next start -p 3001",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.102.8",
+    "all": "^0.0.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.462.0",
+    "motion": "^13.3.0",
+    "next": "^14.2.20",
+    "next-themes": "^0.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-is": "^19.3.0",
+    "recharts": "^3.10.1",
+    "tailwind-merge": "^2.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3"
+  }
+}
