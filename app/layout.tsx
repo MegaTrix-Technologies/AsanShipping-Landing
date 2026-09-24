@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Sora } from "next/font/google";
+import { Manrope, Sora, Orbitron } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
@@ -12,6 +12,12 @@ const manrope = Manrope({
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sora",
+  display: "swap",
+});
+
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  variable: "--font-orbitron",
   display: "swap",
 });
 
@@ -41,7 +47,12 @@ export const metadata: Metadata = {
   creator: "Asan Shipping",
   publisher: "Asan Shipping",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" }
+    ],
+    shortcut: "/favicon.svg",
+    apple: "/images/new-logo/app-icon/asan-app-icon-squircle-dark.svg",
   },
   openGraph: {
     type: "website",
@@ -53,7 +64,7 @@ export const metadata: Metadata = {
       "Automate COD WhatsApp verification, eliminate RTO losses, and auto-route orders across Pakistan's top couriers.",
     images: [
       {
-        url: "/images/login-screen-logo.png",
+        url: "/images/new-logo/full-logo/asan-logo-full-dark-bg.svg",
         width: 1200,
         height: 630,
         alt: "Asan Shipping Control Tower",
@@ -65,7 +76,7 @@ export const metadata: Metadata = {
     title: "Asan Shipping — Courier OS for Pakistan",
     description:
       "Automate COD verification, reduce RTO losses, and dispatch via TCS, Trax, Leopards, PostEx, and M&P.",
-    images: ["/images/login-screen-logo.png"],
+    images: ["/images/new-logo/full-logo/asan-logo-full-dark-bg.svg"],
   },
   robots: {
     index: true,
@@ -86,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${sora.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${sora.variable} ${orbitron.variable}`}>
       <body className="min-h-screen font-sans antialiased bg-background text-foreground transition-colors duration-300">
         <ThemeProvider
           attribute="class"

@@ -25,16 +25,34 @@ export function Navbar({ onOpenConnectModal }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-2xl border-b border-border/80 bg-background/85 transition-all duration-300 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group shrink-0">
-          <div className="relative h-10 w-44 sm:w-48 transition-transform duration-200 group-hover:scale-105">
-            <Image
-              src="/images/login-screen-logo.png"
-              alt="AsanShipping Logo"
-              fill
-              priority
-              className="object-contain object-left"
+        {/* Logo — Icon + Sliding Wordmark on Hover */}
+        <Link href="/" className="flex items-center group shrink-0">
+          <div className="flex items-center gap-0 transition-transform duration-200 group-hover:scale-[1.03]">
+            {/* Icon Mark (always visible) */}
+            <img
+              src="/images/new-logo/icon/asan-icon-dark.svg"
+              alt="AsanShipping"
+              className="hidden dark:block h-11 sm:h-12 w-auto object-contain"
             />
+            <img
+              src="/images/new-logo/icon/asan-icon-light.svg"
+              alt="AsanShipping"
+              className="block dark:hidden h-11 sm:h-12 w-auto object-contain"
+            />
+
+            {/* Wordmark — slides in on hover */}
+            <div className="overflow-hidden w-0 group-hover:w-36 sm:group-hover:w-40 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+              <img
+                src="/images/new-logo/wordmark/asan-wordmark-dark.svg"
+                alt="AsanShipping"
+                className="hidden dark:block h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+              />
+              <img
+                src="/images/new-logo/wordmark/asan-wordmark-light.svg"
+                alt="AsanShipping"
+                className="block dark:hidden h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+              />
+            </div>
           </div>
         </Link>
 

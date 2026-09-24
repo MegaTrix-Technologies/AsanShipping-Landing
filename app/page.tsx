@@ -25,9 +25,7 @@ import {
 
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-const asanLogoDark = "/images/asan-logo-dark.png";
-const asanLogoLight = "/images/asan-logo-light.png";
-const loginScreenLogo = "/images/login-screen-logo.png";
+import { Footer } from "@/components/Footer";
 
 const easeCurve = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -875,17 +873,38 @@ function HomePageContent() {
         className="sticky top-0 z-50 backdrop-blur-2xl border-b border-border/80 bg-background/85 transition-all duration-300 shadow-sm"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
+          {/* Logo — Icon + Sliding Wordmark on Hover */}
+          <Link href="/" className="flex items-center group shrink-0">
             <motion.div
-              whileHover={{ scale: 1.06, rotate: 2 }}
+              whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
+              className="flex items-center gap-0"
             >
+              {/* Icon Mark (always visible) */}
               <img
-                src={loginScreenLogo}
-                alt="AsanShipping Logo"
-                className="h-10 sm:h-11 w-auto object-contain drop-shadow-md"
+                src="/images/new-logo/icon/asan-icon-dark.svg"
+                alt="AsanShipping"
+                className="hidden dark:block h-11 sm:h-12 w-auto object-contain"
               />
+              <img
+                src="/images/new-logo/icon/asan-icon-light.svg"
+                alt="AsanShipping"
+                className="block dark:hidden h-11 sm:h-12 w-auto object-contain"
+              />
+
+              {/* Wordmark — slides in on hover */}
+              <div className="overflow-hidden w-0 group-hover:w-36 sm:group-hover:w-40 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+                <img
+                  src="/images/new-logo/wordmark/asan-wordmark-dark.svg"
+                  alt="AsanShipping"
+                  className="hidden dark:block h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+                />
+                <img
+                  src="/images/new-logo/wordmark/asan-wordmark-light.svg"
+                  alt="AsanShipping"
+                  className="block dark:hidden h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+                />
+              </div>
             </motion.div>
           </Link>
 
@@ -1008,13 +1027,42 @@ function HomePageContent() {
             initial="hidden"
             animate="visible"
           >
-            {/* Prominent AsanShipping Logo */}
-            <motion.div variants={fadeUp} className="flex justify-center pb-2">
-              <img
-                src={loginScreenLogo}
-                alt="Asan Shipping AI Logo"
-                className="h-24 sm:h-32 md:h-40 w-auto object-contain hover:scale-105 transition-transform duration-300 drop-shadow-2xl"
-              />
+            {/* Animated Hero Logo — steals the show */}
+            <motion.div
+              className="flex justify-center pb-4"
+              initial={{ opacity: 0, scale: 0.6, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{
+                duration: 1,
+                delay: 0.3,
+                ease: [0.16, 1, 0.3, 1],
+                scale: { type: "spring", damping: 12, stiffness: 100, delay: 0.3 }
+              }}
+            >
+              {/* Floating container */}
+              <motion.div
+                className="relative"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+              >
+                {/* Glow pulse ring */}
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-primary/20 blur-3xl"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: [0.8, 1.5, 1.8], opacity: [0, 0.6, 0] }}
+                  transition={{ duration: 2, delay: 1.3, ease: "easeOut" }}
+                />
+                <img
+                  src="/images/new-logo/stacked/asan-logo-stacked-dark.svg"
+                  alt="Asan Shipping Logo"
+                  className="hidden dark:block h-32 sm:h-40 md:h-48 w-auto object-contain relative z-10"
+                />
+                <img
+                  src="/images/new-logo/stacked/asan-logo-stacked-light.svg"
+                  alt="Asan Shipping Logo"
+                  className="block dark:hidden h-32 sm:h-40 md:h-48 w-auto object-contain relative z-10"
+                />
+              </motion.div>
             </motion.div>
 
             {/* Pain -> Solution Headline (No absolute claims) */}
@@ -1281,7 +1329,8 @@ function HomePageContent() {
               {/* Simulator Header & Controls Bar */}
               <div className="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-slate-200 dark:border-zinc-800 gap-4 mb-6">
                 <div className="flex items-center gap-3">
-                  <img src={loginScreenLogo} alt="Logo" className="h-8 w-auto object-contain" />
+                  <img src="/images/new-logo/icon/asan-icon-dark.svg" alt="AsanShipping" className="hidden dark:block h-8 w-auto object-contain" />
+                  <img src="/images/new-logo/icon/asan-icon-light.svg" alt="AsanShipping" className="block dark:hidden h-8 w-auto object-contain" />
                   <div className="h-5 w-px bg-slate-300 dark:bg-zinc-700 hidden sm:block" />
                   <span className="text-xs font-mono font-black tracking-wider text-primary">
                     LIVE SIMULATOR CONTROL TOWER
@@ -2612,61 +2661,13 @@ function HomePageContent() {
       </section>
 
       {/* ==================================================================== */}
-      {/* 10. 4-COLUMN STRUCTURED FOOTER                                       */}
+      {/* 10. STRUCTURED FOOTER WITH MEGATRIX BRANDING                          */}
       {/* ==================================================================== */}
-      <footer className="border-t border-slate-200 dark:border-zinc-900 bg-white dark:bg-black text-slate-900 dark:text-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-
-            {/* Col 1: Product */}
-            <div className="space-y-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-primary font-mono">Product</div>
-              <ul className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-                <li><a href="#simulator" className="hover:text-primary transition-colors">Live Control Simulator</a></li>
-                <li><a href="#couriers" className="hover:text-primary transition-colors">Courier API Matrix</a></li>
-                <li><a href="#shopify-embedded" className="hover:text-primary transition-colors">Shopify Embedded App</a></li>
-                <li><a href="#calculator" className="hover:text-primary transition-colors">Interactive ROI Calculator</a></li>
-                <li><a href="#testimonials" className="hover:text-primary transition-colors">Merchant Testimonials</a></li>
-              </ul>
-            </div>
-
-            {/* Col 2: Company */}
-            <div className="space-y-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-primary font-mono">Company</div>
-              <ul className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-                <li><button onClick={() => setShowVisionModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer">About Us &amp; Our Story</button></li>
-                <li><button onClick={() => setShowVisionModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer flex items-center gap-1">Our Goals &amp; Vision <Sparkles className="w-3 h-3 text-primary" /></button></li>
-                <li><a href="#features" className="hover:text-primary transition-colors">Product Roadmap</a></li>
-                <li><a href={loginUrl} className="hover:text-primary transition-colors">Merchant Support Portal</a></li>
-              </ul>
-            </div>
-
-            {/* Col 3: Legal & Compliance */}
-            <div className="space-y-4">
-              <div className="text-xs font-bold uppercase tracking-wider text-primary font-mono">Legal &amp; Compliance</div>
-              <ul className="space-y-2.5 text-xs text-slate-600 dark:text-slate-400">
-                <li><button onClick={() => setShowPrivacyModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-primary" /> Privacy &amp; Data Protection</button></li>
-                <li><button onClick={() => setShowTermsModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer">Terms of Service</button></li>
-                <li><button onClick={() => setShowPrivacyModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer">Shopify GDPR Webhooks</button></li>
-                <li><button onClick={() => setShowPrivacyModal(true)} className="hover:text-primary transition-colors text-left cursor-pointer">AES-256 Security Status</button></li>
-              </ul>
-            </div>
-
-            {/* Col 4: Socials & Copyright */}
-            <div className="space-y-4">
-              <img src={loginScreenLogo} alt="AsanShipping Logo" className="h-8 w-auto object-contain" />
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Pakistan&apos;s #1 AI-driven autonomous logistics control tower. Eliminating COD RTO losses for high-scale D2C brands.
-              </p>
-              <div className="text-xs text-slate-400 font-mono pt-2">
-                &copy; 2026 AsanShipping Inc. <br />
-                <span className="text-primary">Engineered in Lahore, Pakistan 🇵🇰</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </footer>
+      <Footer
+        onOpenVision={() => setShowVisionModal(true)}
+        onOpenPrivacy={() => setShowPrivacyModal(true)}
+        onOpenTerms={() => setShowTermsModal(true)}
+      />
 
       {/* ==================================================================== */}
       {/* MODALS: CONNECT SHOPIFY / WAYBILL / PRIVACY / TERMS / VISION          */}
@@ -2687,7 +2688,8 @@ function HomePageContent() {
             >
               <div className="flex justify-between items-center border-b border-slate-100 dark:border-zinc-800 pb-4">
                 <div className="flex items-center gap-2">
-                  <img src={loginScreenLogo} alt="Logo" className="h-7 w-auto object-contain" />
+                  <img src="/images/new-logo/horizontal/asan-logo-horizontal-dark.svg" alt="Logo" className="hidden dark:block h-7 w-auto object-contain" />
+                  <img src="/images/new-logo/horizontal/asan-logo-horizontal-light.svg" alt="Logo" className="block dark:hidden h-7 w-auto object-contain" />
                   <span className="font-bold text-sm">1-Click Shopify Integration</span>
                 </div>
                 <button onClick={() => setShowConnectModal(false)} className="text-slate-400 hover:text-slate-900 dark:hover:text-white text-sm font-mono cursor-pointer">✕ Close</button>

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: ArticleDetailPageProps): Prom
   const title = article.metaTitle || article.title;
   const description = article.metaDescription || article.excerpt || "";
   const canonical = article.canonicalUrl || `${siteUrl}/articles/${article.slug}`;
-  const imageUrl = article.ogImage || article.featuredImage || "/images/login-screen-logo.png";
+  const imageUrl = article.ogImage || article.featuredImage || "/images/new-logo/full-logo/asan-logo-full-dark-bg.svg";
 
   return {
     title: `${title} | AsanShipping`,
@@ -86,7 +86,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
     "@type": "BlogPosting",
     headline: article.title,
     description: article.metaDescription || article.excerpt || article.title,
-    image: article.featuredImage || `${siteUrl}/images/login-screen-logo.png`,
+    image: article.featuredImage || `${siteUrl}/images/new-logo/full-logo/asan-logo-full-dark-bg.svg`,
     datePublished: article.publishedAt || article.createdAt,
     dateModified: article.updatedAt || article.publishedAt || article.createdAt,
     author: {
@@ -99,7 +99,7 @@ export default async function ArticleDetailPage({ params }: ArticleDetailPagePro
       name: "Asan Shipping",
       logo: {
         "@type": "ImageObject",
-        url: `${siteUrl}/images/login-screen-logo.png`,
+        url: `${siteUrl}/images/new-logo/full-logo/asan-logo-full-dark-bg.svg`,
       },
     },
     mainEntityOfPage: {

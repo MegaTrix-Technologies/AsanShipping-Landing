@@ -52,12 +52,20 @@ export function Modals({
           >
             <div className="flex justify-between items-center border-b border-border pb-4">
               <div className="flex items-center gap-2">
-                <div className="relative h-7 w-28">
+                <div className="relative h-7 w-32 flex items-center">
                   <Image
-                    src="/images/login-screen-logo.png"
+                    src="/images/new-logo/horizontal/asan-logo-horizontal-dark.svg"
                     alt="Logo"
-                    fill
-                    className="object-contain object-left"
+                    width={130}
+                    height={28}
+                    className="hidden dark:block h-7 w-auto object-contain object-left"
+                  />
+                  <Image
+                    src="/images/new-logo/horizontal/asan-logo-horizontal-light.svg"
+                    alt="Logo"
+                    width={130}
+                    height={28}
+                    className="block dark:hidden h-7 w-auto object-contain object-left"
                   />
                 </div>
                 <span className="font-bold text-sm">1-Click Shopify Integration</span>
