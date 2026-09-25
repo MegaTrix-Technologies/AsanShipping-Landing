@@ -872,11 +872,11 @@ function HomePageContent() {
         transition={{ duration: 0.5, ease: easeCurve }}
         className="sticky top-0 z-50 backdrop-blur-2xl border-b border-border/80 bg-background/85 transition-all duration-300 shadow-sm"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-[84px] flex items-center justify-between gap-4">
           {/* Logo — Icon + Sliding Wordmark on Hover */}
           <Link href="/" className="flex items-center group shrink-0">
             <motion.div
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
               className="flex items-center gap-0"
             >
@@ -884,25 +884,25 @@ function HomePageContent() {
               <img
                 src="/images/new-logo/icon/asan-icon-dark.svg"
                 alt="AsanShipping"
-                className="hidden dark:block h-11 sm:h-12 w-auto object-contain"
+                className="hidden dark:block h-12 sm:h-14 w-auto object-contain"
               />
               <img
                 src="/images/new-logo/icon/asan-icon-light.svg"
                 alt="AsanShipping"
-                className="block dark:hidden h-11 sm:h-12 w-auto object-contain"
+                className="block dark:hidden h-12 sm:h-14 w-auto object-contain"
               />
 
               {/* Wordmark — slides in on hover */}
-              <div className="overflow-hidden w-0 group-hover:w-36 sm:group-hover:w-40 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
+              <div className="overflow-hidden w-0 group-hover:w-40 sm:group-hover:w-48 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]">
                 <img
                   src="/images/new-logo/wordmark/asan-wordmark-dark.svg"
                   alt="AsanShipping"
-                  className="hidden dark:block h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+                  className="hidden dark:block h-6 sm:h-7 w-40 sm:w-48 object-contain object-left ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
                 />
                 <img
                   src="/images/new-logo/wordmark/asan-wordmark-light.svg"
                   alt="AsanShipping"
-                  className="block dark:hidden h-5 sm:h-6 w-36 sm:w-40 object-contain object-left ml-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
+                  className="block dark:hidden h-6 sm:h-7 w-40 sm:w-48 object-contain object-left ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150"
                 />
               </div>
             </motion.div>
