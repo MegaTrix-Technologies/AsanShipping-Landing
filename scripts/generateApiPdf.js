@@ -21,17 +21,17 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
 
     @page {
       size: A4 portrait;
-      margin: 16mm 14mm 16mm 14mm;
+      margin: 12mm 12mm 14mm 12mm;
       @bottom-right {
         content: "Page " counter(page);
         font-family: 'JetBrains Mono', monospace;
-        font-size: 8pt;
+        font-size: 7.5pt;
         color: #64748b;
       }
       @bottom-left {
-        content: "AsanShipping External Developer API v1.0";
+        content: "AsanShipping External Developer API v1.0 • https://merchant-api.asanshipping.com";
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 8pt;
+        font-size: 7.5pt;
         color: #64748b;
       }
     }
@@ -44,8 +44,8 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-      font-size: 9.5pt;
-      line-height: 1.55;
+      font-size: 8.5pt;
+      line-height: 1.45;
       color: #0f172a;
       background: #ffffff;
       margin: 0;
@@ -64,62 +64,63 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
 
     /* Cover Page */
     .cover-page {
-      height: 100vh;
+      height: 96vh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       background: linear-gradient(145deg, #09090b 0%, #0f172a 60%, #064e3b 100%);
       color: #ffffff;
-      padding: 40mm 20mm 20mm 20mm;
+      padding: 35mm 18mm 18mm 18mm;
       border-radius: 6px;
       page-break-after: always;
+      break-after: page;
     }
 
     .cover-badge {
       display: inline-block;
-      padding: 6px 14px;
+      padding: 5px 12px;
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.4);
       color: #34d399;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9pt;
+      font-size: 8.5pt;
       font-weight: 700;
       border-radius: 999px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
     .cover-title {
-      font-size: 34pt;
+      font-size: 30pt;
       font-weight: 800;
       line-height: 1.15;
       letter-spacing: -0.03em;
-      margin: 0 0 16px 0;
+      margin: 0 0 14px 0;
       color: #ffffff;
     }
 
     .cover-subtitle {
-      font-size: 13pt;
+      font-size: 11.5pt;
       color: #94a3b8;
       max-width: 520px;
-      line-height: 1.5;
-      margin: 0 0 30px 0;
+      line-height: 1.45;
+      margin: 0 0 24px 0;
     }
 
     .cover-meta {
       border-top: 1px solid rgba(255, 255, 255, 0.15);
-      padding-top: 20px;
+      padding-top: 16px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      font-size: 8.5pt;
+      gap: 14px;
+      font-size: 8pt;
     }
 
     .cover-meta-label {
       color: #64748b;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 7.5pt;
+      font-size: 7pt;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .cover-meta-value {
@@ -129,33 +130,39 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
 
     /* Headings */
     h1 {
-      font-size: 18pt;
+      font-size: 15pt;
       font-weight: 800;
       color: #0f172a;
       border-bottom: 2px solid #059669;
-      padding-bottom: 6px;
-      margin-top: 0;
-      margin-bottom: 14px;
+      padding-bottom: 4px;
+      margin-top: 14px;
+      margin-bottom: 10px;
+      page-break-after: avoid;
+      break-after: avoid;
     }
 
     h2 {
-      font-size: 13pt;
+      font-size: 11pt;
       font-weight: 700;
       color: #0f172a;
-      margin-top: 18px;
-      margin-bottom: 8px;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      page-break-after: avoid;
+      break-after: avoid;
     }
 
     h3 {
-      font-size: 10.5pt;
+      font-size: 9.5pt;
       font-weight: 700;
       color: #1e293b;
-      margin-top: 12px;
-      margin-bottom: 6px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      page-break-after: avoid;
+      break-after: avoid;
     }
 
     p {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       color: #334155;
     }
 
@@ -163,8 +170,15 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 10px 0 16px 0;
-      font-size: 8.5pt;
+      margin: 6px 0 12px 0;
+      font-size: 7.8pt;
+      page-break-inside: auto;
+      break-inside: auto;
+    }
+
+    tr {
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     th {
@@ -173,16 +187,16 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       font-weight: 700;
       font-family: 'JetBrains Mono', monospace;
       text-align: left;
-      padding: 7px 10px;
+      padding: 5px 8px;
       border: 1px solid #cbd5e1;
-      font-size: 8pt;
+      font-size: 7.5pt;
     }
 
     td {
-      padding: 7px 10px;
+      padding: 5px 8px;
       border: 1px solid #e2e8f0;
       color: #1e293b;
-      vertical-align: top;
+      vertical-align: middle;
     }
 
     tr:nth-child(even) td {
@@ -192,38 +206,40 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
     /* Code Blocks */
     code {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 8pt;
+      font-size: 7.5pt;
       background: #f1f5f9;
-      padding: 2px 5px;
-      border-radius: 4px;
+      padding: 1.5px 4px;
+      border-radius: 3px;
       color: #0f766e;
     }
 
     pre {
       background: #09090b;
       color: #34d399;
-      padding: 12px;
-      border-radius: 6px;
+      padding: 9px 12px;
+      border-radius: 5px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 7.8pt;
-      line-height: 1.45;
+      font-size: 7.2pt;
+      line-height: 1.4;
       overflow-x: hidden;
       white-space: pre-wrap;
       word-break: break-all;
-      margin: 8px 0 14px 0;
+      margin: 6px 0 10px 0;
       border: 1px solid #27272a;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     /* Method Badges */
     .badge {
       display: inline-block;
-      padding: 2px 7px;
-      border-radius: 4px;
+      padding: 2px 6px;
+      border-radius: 3px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 7.5pt;
+      font-size: 7pt;
       font-weight: 700;
       text-transform: uppercase;
-      margin-right: 6px;
+      margin-right: 5px;
     }
 
     .badge-get { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
@@ -233,11 +249,12 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
 
     .endpoint-card {
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 12px 14px;
-      margin-bottom: 18px;
+      border-radius: 5px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
       background: #ffffff;
       page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .endpoint-header {
@@ -245,34 +262,36 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 8px;
-      margin-bottom: 8px;
+      padding-bottom: 6px;
+      margin-bottom: 6px;
     }
 
     .endpoint-path {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 9.5pt;
+      font-size: 8.5pt;
       font-weight: 700;
       color: #0f172a;
     }
 
     .endpoint-scope {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 7.5pt;
+      font-size: 7pt;
       background: #ecfdf5;
       color: #047857;
       border: 1px solid #a7f3d0;
-      padding: 2px 6px;
-      border-radius: 4px;
+      padding: 1.5px 5px;
+      border-radius: 3px;
     }
 
     .callout {
-      border-left: 4px solid #059669;
+      border-left: 3px solid #059669;
       background: #f0fdf4;
-      padding: 10px 14px;
-      margin: 12px 0;
-      border-radius: 0 6px 6px 0;
-      font-size: 8.5pt;
+      padding: 8px 12px;
+      margin: 8px 0;
+      border-radius: 0 5px 5px 0;
+      font-size: 8pt;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
   </style>
 </head>
@@ -583,6 +602,8 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       </div>
       <p>Cancel an unbooked order and automatically restock reserved items back to warehouse ledger.</p>
     </div>
+  </div>
+
   <!-- ENDPOINT REFERENCE: LOCATIONS & ADDRESS READER -->
   <div class="page-break">
     <h1>5. Delivery Locations & Address Reader Tool</h1>

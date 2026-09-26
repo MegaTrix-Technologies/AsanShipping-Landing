@@ -824,6 +824,51 @@ function HomePageContent() {
       quote: "Smart courier routing means we stopped manually comparing TCS vs Leopards vs PostEx tariffs every single order. It just picks the best one automatically.",
       metric: "4.2 hrs",
       metricLabel: "saved / week"
+    },
+    {
+      name: "Noor Apparel",
+      role: "Shopify Seller, Lahore",
+      avatarBg: "bg-primary/20 text-primary",
+      initials: "NA",
+      quote: "We cut RTO by 34% and doubled dispatches in a month. Asan finally made courier chaos feel calm.",
+      metric: "2× Dispatches",
+      metricLabel: "in 1 month"
+    },
+    {
+      name: "Sana Karim",
+      role: "Fashion Brand, Karachi",
+      avatarBg: "bg-primary/20 text-primary",
+      initials: "SK",
+      quote: "IVR verification alone paid for the whole platform in the first two weeks. Fake orders are basically gone.",
+      metric: "−34% RTO",
+      metricLabel: "in 2 weeks"
+    },
+    {
+      name: "Bilal Malik",
+      role: "Electronics Seller, Islamabad",
+      avatarBg: "bg-primary/20 text-primary",
+      initials: "BM",
+      quote: "One dashboard for every courier. No more juggling six portals just to print labels for the day.",
+      metric: "6 Couriers",
+      metricLabel: "one dashboard"
+    },
+    {
+      name: "Ayesha Nasir",
+      role: "Beauty D2C, Rawalpindi",
+      avatarBg: "bg-primary/20 text-primary",
+      initials: "AN",
+      quote: "Setup took ten minutes. The AI agent now handles half of my confirmation calls on its own.",
+      metric: "50% Calls",
+      metricLabel: "automated"
+    },
+    {
+      name: "Hamza Tariq",
+      role: "Home Goods, Faisalabad",
+      avatarBg: "bg-primary/20 text-primary",
+      initials: "HT",
+      quote: "Analytics finally told us which cities were killing our margins. We fixed routing and never looked back.",
+      metric: "City Insights",
+      metricLabel: "margin fix"
     }
   ];
 
@@ -914,6 +959,7 @@ function HomePageContent() {
               { href: "/", label: "Home" },
               { href: "#couriers", label: "Couriers" },
               { href: "#pricing", label: "Pricing" },
+              { href: "/developers", label: "Developers" },
               { href: "/articles", label: "Articles" },
               { href: "#faq", label: "FAQ" }
             ].map((item) => (
@@ -982,6 +1028,7 @@ function HomePageContent() {
                 { href: "/", label: "Home" },
                 { href: "#couriers", label: "Couriers" },
                 { href: "#pricing", label: "Pricing" },
+                { href: "/developers", label: "Developers" },
                 { href: "/articles", label: "Articles" },
                 { href: "#faq", label: "FAQ" }
               ].map((item) => (
@@ -2261,7 +2308,7 @@ function HomePageContent() {
             <p className="mt-3 text-base text-slate-600 dark:text-slate-400">Illustrative merchant scenarios showing the kind of impact the platform is designed to deliver.</p>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {testimonials.map((t, i) => (
               <ScrollReveal key={t.name} delay={i * 0.1}>
                 <TiltCard className="rounded-2xl border border-slate-200 dark:border-zinc-800 p-7 bg-white dark:bg-zinc-950 shadow-sm h-full flex flex-col justify-between">
