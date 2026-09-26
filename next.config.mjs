@@ -26,6 +26,25 @@ const nextConfig = {
     }
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/developer-api',
+        destination: '/developers',
+        permanent: true,
+      },
+      {
+        source: '/api-docs',
+        destination: '/developers',
+        permanent: true,
+      },
+      {
+        source: '/docs/api',
+        destination: '/developers',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
