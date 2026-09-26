@@ -22,6 +22,8 @@ import {
   Layers,
   Cpu,
   Sparkles,
+  Globe,
+  Info,
 } from "lucide-react";
 
 export default function DevelopersPage() {
@@ -151,6 +153,58 @@ export default function DevelopersPage() {
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     Network dropouts and automated retries never cause duplicate orders or phantom inventory deductions thanks to 24-hour idempotent transaction caching.
                   </p>
+                </div>
+              </div>
+
+              {/* Base URLs Section */}
+              <div className="space-y-4 pt-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="font-bold text-base text-foreground flex items-center gap-2">
+                    <Globe className="w-4 h-4 text-emerald-500" />
+                    <span>Base URLs</span>
+                  </h3>
+                </div>
+
+                <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-muted border-b border-border text-foreground font-mono">
+                      <tr>
+                        <th className="py-3 px-4">Environment</th>
+                        <th className="py-3 px-4">Base URL</th>
+                        <th className="py-3 px-4">Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border font-sans">
+                      <tr className="hover:bg-muted/30">
+                        <td className="py-3.5 px-4 font-bold text-foreground">
+                          <span className="inline-flex items-center gap-1.5 font-semibold text-emerald-400">
+                            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                            Live Production
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 font-mono font-bold text-emerald-400">
+                          https://merchant-api.asanshipping.com/api/v1
+                        </td>
+                        <td className="py-3.5 px-4 text-muted-foreground">
+                          Production store integrations &amp; live order processing
+                        </td>
+                      </tr>
+                      <tr className="hover:bg-muted/30">
+                        <td className="py-3.5 px-4 font-bold text-foreground">
+                          <span className="inline-flex items-center gap-1.5 font-semibold text-blue-400">
+                            <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+                            Local / Sandbox
+                          </span>
+                        </td>
+                        <td className="py-3.5 px-4 font-mono font-bold text-blue-400">
+                          http://localhost:5000/api/v1
+                        </td>
+                        <td className="py-3.5 px-4 text-muted-foreground">
+                          Local staging, CI/CD pipelines &amp; test suites
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </section>

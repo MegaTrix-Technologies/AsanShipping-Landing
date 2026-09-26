@@ -53,7 +53,7 @@ export interface ApiSection {
   endpoints?: ApiEndpoint[];
 }
 
-export const API_BASE_PROD = "https://api-core.asanshipping.com/api/v1";
+export const API_BASE_PROD = "https://merchant-api.asanshipping.com/api/v1";
 export const API_BASE_DEV = "http://localhost:5000/api/v1";
 
 export const API_SCOPES = [
@@ -65,6 +65,8 @@ export const API_SCOPES = [
   { scope: "orders:write", description: "Create canonical customer orders with automated destination validation and phone normalization." },
   { scope: "orders:cancel", description: "Cancel pending or unbooked orders and trigger automatic inventory restocks." },
   { scope: "tracking:read", description: "Fetch public and authenticated shipment tracking milestones and carrier progress." },
+  { scope: "locations:read", description: "Access all available Pakistani delivery cities, provinces, tiers, and sub-areas." },
+  { scope: "tools:execute", description: "Intelligently parse unstructured single or bulk address strings to extract phone numbers, cities, and sub-areas." },
   { scope: "webhooks:manage", description: "Register, update, delete webhook subscriptions, dispatch tests, and inspect audit logs." },
 ];
 
@@ -142,10 +144,10 @@ export const API_SECTIONS: ApiSection[] = [
           }
         },
         snippets: {
-          curl: `curl -X GET "https://api-core.asanshipping.com/api/v1/store" \\
+          curl: `curl -X GET "https://merchant-api.asanshipping.com/api/v1/store" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Accept: application/json"`,
-          node: `const response = await fetch("https://api-core.asanshipping.com/api/v1/store", {
+          node: `const response = await fetch("https://merchant-api.asanshipping.com/api/v1/store", {
   method: "GET",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -156,7 +158,7 @@ const result = await response.json();
 console.log(result.data);`,
           python: `import requests
 
-url = "https://api-core.asanshipping.com/api/v1/store"
+url = "https://merchant-api.asanshipping.com/api/v1/store"
 headers = {
     "Authorization": "Bearer as_live_YOUR_KEY",
     "Accept": "application/json"
@@ -166,7 +168,7 @@ response = requests.get(url, headers=headers)
 data = response.json()
 print(data)`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/store");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/store");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Authorization: Bearer as_live_YOUR_KEY",
@@ -232,23 +234,23 @@ print_r($result);
           }
         },
         snippets: {
-          curl: `curl -X GET "https://api-core.asanshipping.com/api/v1/products?limit=10&status=active" \\
+          curl: `curl -X GET "https://merchant-api.asanshipping.com/api/v1/products?limit=10&status=active" \\
   -H "Authorization: Bearer as_live_YOUR_KEY"`,
           node: `const params = new URLSearchParams({ limit: "10", status: "active" });
-const response = await fetch(\`https://api-core.asanshipping.com/api/v1/products?\${params}\`, {
+const response = await fetch(\`https://merchant-api.asanshipping.com/api/v1/products?\${params}\`, {
   headers: { "Authorization": "Bearer as_live_YOUR_KEY" }
 });
 const { data, pagination } = await response.json();`,
           python: `import requests
 
 response = requests.get(
-    "https://api-core.asanshipping.com/api/v1/products",
+    "https://merchant-api.asanshipping.com/api/v1/products",
     headers={"Authorization": "Bearer as_live_YOUR_KEY"},
     params={"limit": 10, "status": "active"}
 )
 print(response.json())`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/products?limit=10&status=active");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/products?limit=10&status=active");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY"]);
 $response = json_decode(curl_exec($ch), true);
@@ -314,7 +316,7 @@ $response = json_decode(curl_exec($ch), true);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/products" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/products" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Idempotency-Key: $(uuidgen)" \\
   -H "Content-Type: application/json" \\
@@ -325,7 +327,7 @@ $response = json_decode(curl_exec($ch), true);
     "weightGrams": 650,
     "inventory": { "warehouseId": "wh-khi-01", "quantity": 40 }
   }'`,
-          node: `const res = await fetch("https://api-core.asanshipping.com/api/v1/products", {
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/products", {
   method: "POST",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -356,7 +358,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
-response = requests.post("https://api-core.asanshipping.com/api/v1/products", json=payload, headers=headers)
+response = requests.post("https://merchant-api.asanshipping.com/api/v1/products", json=payload, headers=headers)
 print(response.json())`,
           php: `<?php
 $data = [
@@ -367,7 +369,7 @@ $data = [
     "inventory" => ["warehouseId" => "wh-khi-01", "quantity" => 40]
 ];
 
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/products");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/products");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -406,13 +408,13 @@ $result = curl_exec($ch);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/products/prod_01J8B1/images" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/products/prod_01J8B1/images" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -F "image=@/path/to/hoodie-front.jpg"`,
           node: `const formData = new FormData();
 formData.append("image", fileBlob, "hoodie.jpg");
 
-const res = await fetch("https://api-core.asanshipping.com/api/v1/products/prod_01J8B1/images", {
+const res = await fetch("https://merchant-api.asanshipping.com/api/v1/products/prod_01J8B1/images", {
   method: "POST",
   headers: { "Authorization": "Bearer as_live_YOUR_KEY" },
   body: formData
@@ -424,7 +426,7 @@ files = {'image': open('hoodie.jpg', 'rb')}
 headers = {'Authorization': 'Bearer as_live_YOUR_KEY'}
 
 response = requests.post(
-    "https://api-core.asanshipping.com/api/v1/products/prod_01J8B1/images",
+    "https://merchant-api.asanshipping.com/api/v1/products/prod_01J8B1/images",
     headers=headers,
     files=files
 )
@@ -433,7 +435,7 @@ print(response.json())`,
 $cfile = new CURLFile('/path/to/hoodie.jpg', 'image/jpeg', 'image');
 $data = ['image' => $cfile];
 
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/products/prod_01J8B1/images");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/products/prod_01J8B1/images");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY"]);
@@ -479,21 +481,21 @@ $res = curl_exec($ch);
           ]
         },
         snippets: {
-          curl: `curl -X GET "https://api-core.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01" \\
+          curl: `curl -X GET "https://merchant-api.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01" \\
   -H "Authorization: Bearer as_live_YOUR_KEY"`,
-          node: `const res = await fetch("https://api-core.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01", {
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01", {
   headers: { "Authorization": "Bearer as_live_YOUR_KEY" }
 });
 const inventory = await res.json();`,
           python: `import requests
 res = requests.get(
-    "https://api-core.asanshipping.com/api/v1/inventory",
+    "https://merchant-api.asanshipping.com/api/v1/inventory",
     headers={"Authorization": "Bearer as_live_YOUR_KEY"},
     params={"warehouseId": "wh-khi-01"}
 )
 print(res.json())`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/inventory?warehouseId=wh-khi-01");
 curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY"]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $data = json_decode(curl_exec($ch), true);
@@ -538,7 +540,7 @@ $data = json_decode(curl_exec($ch), true);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/inventory/adjustments" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/inventory/adjustments" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Idempotency-Key: $(uuidgen)" \\
   -H "Content-Type: application/json" \\
@@ -548,7 +550,7 @@ $data = json_decode(curl_exec($ch), true);
     "quantityDelta": 25,
     "reason": "RESTOCK"
   }'`,
-          node: `const res = await fetch("https://api-core.asanshipping.com/api/v1/inventory/adjustments", {
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/inventory/adjustments", {
   method: "POST",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -565,12 +567,12 @@ $data = json_decode(curl_exec($ch), true);
           python: `import requests, uuid
 
 res = requests.post(
-    "https://api-core.asanshipping.com/api/v1/inventory/adjustments",
+    "https://merchant-api.asanshipping.com/api/v1/inventory/adjustments",
     headers={"Authorization": "Bearer as_live_YOUR_KEY", "Idempotency-Key": str(uuid.uuid4())},
     json={"sku": "TS-BLK-M", "warehouseId": "wh-khi-01", "quantityDelta": 25, "reason": "RESTOCK"}
 )`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/inventory/adjustments");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/inventory/adjustments");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     "sku" => "TS-BLK-M",
@@ -672,7 +674,7 @@ $out = curl_exec($ch);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/orders" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/orders" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Idempotency-Key: ord-idem-773a-44e" \\
   -H "Content-Type: application/json" \\
@@ -692,7 +694,7 @@ $out = curl_exec($ch);
     "paymentMethod": "COD",
     "totalAmount": 5248
   }'`,
-          node: `const newOrder = await fetch("https://api-core.asanshipping.com/api/v1/orders", {
+          node: `const newOrder = await fetch("https://merchant-api.asanshipping.com/api/v1/orders", {
   method: "POST",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -721,7 +723,7 @@ payload = {
 }
 
 res = requests.post(
-    "https://api-core.asanshipping.com/api/v1/orders",
+    "https://merchant-api.asanshipping.com/api/v1/orders",
     headers={
         "Authorization": "Bearer as_live_YOUR_KEY",
         "Idempotency-Key": "ord-idem-773a-44e",
@@ -740,7 +742,7 @@ $order = [
     "totalAmount" => 5248
 ];
 
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/orders");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/orders");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($order));
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -785,11 +787,11 @@ $response = curl_exec($ch);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/orders/ord_01J8C8/cancel" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/orders/ord_01J8C8/cancel" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{ "reason": "CUSTOMER_REQUEST", "restockInventory": true }'`,
-          node: `const res = await fetch("https://api-core.asanshipping.com/api/v1/orders/ord_01J8C8/cancel", {
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/orders/ord_01J8C8/cancel", {
   method: "POST",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -799,12 +801,12 @@ $response = curl_exec($ch);
 });`,
           python: `import requests
 res = requests.post(
-    "https://api-core.asanshipping.com/api/v1/orders/ord_01J8C8/cancel",
+    "https://merchant-api.asanshipping.com/api/v1/orders/ord_01J8C8/cancel",
     headers={"Authorization": "Bearer as_live_YOUR_KEY"},
     json={"reason": "CUSTOMER_REQUEST", "restockInventory": True}
 )`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/orders/ord_01J8C8/cancel");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/orders/ord_01J8C8/cancel");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(["reason" => "CUSTOMER_REQUEST", "restockInventory" => true]));
 curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY", "Content-Type: application/json"]);
@@ -866,23 +868,262 @@ $res = curl_exec($ch);
           }
         },
         snippets: {
-          curl: `curl -X GET "https://api-core.asanshipping.com/api/v1/tracking/ASN-PK-8921849" \\
+          curl: `curl -X GET "https://merchant-api.asanshipping.com/api/v1/tracking/ASN-PK-8921849" \\
   -H "Authorization: Bearer as_live_YOUR_KEY"`,
-          node: `const tracking = await fetch("https://api-core.asanshipping.com/api/v1/tracking/ASN-PK-8921849", {
+          node: `const tracking = await fetch("https://merchant-api.asanshipping.com/api/v1/tracking/ASN-PK-8921849", {
   headers: { "Authorization": "Bearer as_live_YOUR_KEY" }
 });
 const result = await tracking.json();`,
           python: `import requests
 res = requests.get(
-    "https://api-core.asanshipping.com/api/v1/tracking/ASN-PK-8921849",
+    "https://merchant-api.asanshipping.com/api/v1/tracking/ASN-PK-8921849",
     headers={"Authorization": "Bearer as_live_YOUR_KEY"}
 )
 print(res.json())`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/tracking/ASN-PK-8921849");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/tracking/ASN-PK-8921849");
 curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY"]);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $result = json_decode(curl_exec($ch), true);
+?>`
+        }
+      }
+    ]
+  },
+  {
+    id: "locations",
+    title: "Delivery Locations & Cities",
+    description: "Access verified delivery cities, provinces, logistics tiers, and sub-area coverage zones across Pakistan. Ideal for populating checkout city dropdowns, calculating transit times, and validating delivery availability.",
+    endpoints: [
+      {
+        id: "get-cities",
+        method: "GET",
+        path: "/locations/cities",
+        title: "Get All Delivery Cities & Areas",
+        category: "locations",
+        scope: "locations:read / Storefront",
+        description: "Retrieve a complete list of delivery cities with optional search queries, province filtering, and sub-area sector listings.",
+        queryParams: [
+          { name: "search", type: "string", required: false, description: "Filter cities by name or partial string (case-insensitive)", example: "lahore" },
+          { name: "province", type: "string", required: false, description: "Filter cities by province (e.g. Punjab, Sindh, KPK, Balochistan, ICT)", example: "Punjab" },
+          { name: "includeAreas", type: "boolean", required: false, description: "Whether to include detailed sub-areas and sectors (default: true)", example: "true" },
+          { name: "page", type: "number", required: false, description: "Page number for paginated results (default: 1)", example: "1" },
+          { name: "limit", type: "number", required: false, description: "Maximum cities to return per page (default: 1000, max: 2000)", example: "100" }
+        ],
+        responseStatus: 200,
+        responseExample: {
+          success: true,
+          data: [
+            {
+              id: "66aa80c25ab5d9919d2263a1",
+              name: "Lahore",
+              province: "Punjab",
+              tier: "Tier 1",
+              areasCount: 42,
+              areas: [
+                "Johar Town",
+                "Gulberg",
+                "DHA Phase 5",
+                "Model Town",
+                "Bahria Town",
+                "Wapda Town",
+                "Faisal Town",
+                "Allama Iqbal Town"
+              ]
+            },
+            {
+              id: "66aa80c25ab5d9919d2263b8",
+              name: "Karachi",
+              province: "Sindh",
+              tier: "Tier 1",
+              areasCount: 56,
+              areas: [
+                "Clifton",
+                "DHA Phase 6",
+                "Gulshan-e-Iqbal",
+                "North Nazimabad",
+                "PECHS",
+                "Bahria Town Karachi"
+              ]
+            },
+            {
+              id: "66aa80c25ab5d9919d2263c4",
+              name: "Islamabad",
+              province: "Islamabad Capital Territory",
+              tier: "Tier 1",
+              areasCount: 32,
+              areas: [
+                "Sector F-7",
+                "Sector F-10",
+                "Sector F-11",
+                "Sector G-11",
+                "Blue Area",
+                "Bahria Town"
+              ]
+            }
+          ],
+          meta: {
+            total: 1250,
+            page: 1,
+            limit: 100,
+            hasMore: true,
+            requestId: "req_99812f801a2b",
+            apiVersion: "2026-09-01",
+            timestamp: "2026-09-26T14:10:00.000Z"
+          }
+        },
+        snippets: {
+          curl: `curl -X GET "https://merchant-api.asanshipping.com/api/v1/locations/cities?province=Punjab&search=lahore" \\
+  -H "Authorization: Bearer as_live_YOUR_KEY"`,
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/locations/cities?search=lahore", {
+  headers: { "Authorization": "Bearer as_live_YOUR_KEY" }
+});
+const cities = await res.json();
+console.log(cities.data);`,
+          python: `import requests
+res = requests.get(
+    "https://merchant-api.asanshipping.com/api/v1/locations/cities",
+    headers={"Authorization": "Bearer as_live_YOUR_KEY"},
+    params={"province": "Punjab", "search": "lahore"}
+)
+print(res.json())`,
+          php: `<?php
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/locations/cities?search=lahore");
+curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY"]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$cities = json_decode(curl_exec($ch), true);
+?>`
+        }
+      }
+    ]
+  },
+  {
+    id: "tools",
+    title: "Address & Phone Reader Tool",
+    description: "Intelligent AI & rule-based parser that ingests raw, messy, or unstructured customer text (e.g. from WhatsApp, Instagram DMs, checkout textareas, or CSV spreadsheets) and automatically extracts normalized Pakistani phone numbers (+923...), standardized delivery cities, sub-areas, and clean street addresses with confidence scoring. Supports single strings and high-speed bulk arrays (up to 100 items per request).",
+    endpoints: [
+      {
+        id: "parse-address",
+        method: "POST",
+        path: "/tools/parse-address",
+        title: "Intelligent Address & Phone Parser (Single / Bulk)",
+        category: "tools",
+        scope: "tools:execute / orders:write",
+        description: "Parse a single raw address string or a batch array of address strings into structured delivery parameters.",
+        bodyParams: [
+          { name: "text", type: "string | string[]", required: false, description: "Raw address string (for single mode) or array of raw address strings (for batch mode)", example: "\"Ali Khan, 03001234567, House 14 Street 2, Johar Town, lhr\"" },
+          { name: "addresses", type: "string[]", required: false, description: "Alternative array of raw address strings for batch parsing (max 100 per request)", example: "[\"Shop 22, Sector F-10, Islamabad, 03335554433\", \"Usman, 03451122334, Cantt, rwp\"]" }
+        ],
+        requestBodyExample: {
+          addresses: [
+            "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+            "Fatima Tariq, +92 321 9876543, House 12, Street 5, Gulshan-e-Iqbal, Karachi",
+            "Shop 22, Sector F-10/3, Islamabad, 03335554433"
+          ]
+        },
+        responseStatus: 200,
+        responseExample: {
+          success: true,
+          data: {
+            results: [
+              {
+                originalText: "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+                detectedPhone: "03001234567",
+                phoneNormalized: "+923001234567",
+                detectedCity: "Lahore",
+                detectedProvince: "Punjab",
+                detectedSubArea: "Johar Town",
+                cleanedStreetAddress: "Ali Khan, Flat 4B",
+                confidence: {
+                  city: 98,
+                  subArea: 100,
+                  phone: 100,
+                  overall: 99
+                }
+              },
+              {
+                originalText: "Fatima Tariq, +92 321 9876543, House 12, Street 5, Gulshan-e-Iqbal, Karachi",
+                detectedPhone: "03219876543",
+                phoneNormalized: "+923219876543",
+                detectedCity: "Karachi",
+                detectedProvince: "Sindh",
+                detectedSubArea: "Gulshan-e-Iqbal",
+                cleanedStreetAddress: "Fatima Tariq, House 12, Street 5",
+                confidence: {
+                  city: 100,
+                  subArea: 100,
+                  phone: 100,
+                  overall: 100
+                }
+              },
+              {
+                originalText: "Shop 22, Sector F-10/3, Islamabad, 03335554433",
+                detectedPhone: "03335554433",
+                phoneNormalized: "+923335554433",
+                detectedCity: "Islamabad",
+                detectedProvince: "Islamabad Capital Territory",
+                detectedSubArea: "Sector F-10",
+                cleanedStreetAddress: "Shop 22",
+                confidence: {
+                  city: 100,
+                  subArea: 92,
+                  phone: 100,
+                  overall: 98
+                }
+              }
+            ],
+            totalProcessed: 3
+          },
+          meta: {
+            totalProcessed: 3,
+            requestId: "req_f8821092a10c",
+            apiVersion: "2026-09-01",
+            timestamp: "2026-09-26T14:15:00.000Z"
+          }
+        },
+        snippets: {
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/tools/parse-address" \\
+  -H "Authorization: Bearer as_live_YOUR_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "addresses": [
+      "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+      "Fatima Tariq, +923219876543, House 12, Gulshan-e-Iqbal, Karachi"
+    ]
+  }'`,
+          node: `const res = await fetch("https://merchant-api.asanshipping.com/api/v1/tools/parse-address", {
+  method: "POST",
+  headers: {
+    "Authorization": "Bearer as_live_YOUR_KEY",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    text: "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr"
+  })
+});
+const parsed = await res.json();
+console.log(parsed.data);`,
+          python: `import requests
+res = requests.post(
+    "https://merchant-api.asanshipping.com/api/v1/tools/parse-address",
+    headers={"Authorization": "Bearer as_live_YOUR_KEY"},
+    json={
+        "addresses": [
+            "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+            "Fatima Tariq, +923219876543, House 12, Gulshan-e-Iqbal, Karachi"
+        ]
+    }
+)
+print(res.json())`,
+          php: `<?php
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/tools/parse-address");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+    "text" => "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr"
+]));
+curl_setopt($ch, CURLOPT_HTTPHEADER, ["Authorization: Bearer as_live_YOUR_KEY", "Content-Type: application/json"]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$parsed = json_decode(curl_exec($ch), true);
 ?>`
         }
       }
@@ -925,14 +1166,14 @@ $result = json_decode(curl_exec($ch), true);
           }
         },
         snippets: {
-          curl: `curl -X POST "https://api-core.asanshipping.com/api/v1/webhooks" \\
+          curl: `curl -X POST "https://merchant-api.asanshipping.com/api/v1/webhooks" \\
   -H "Authorization: Bearer as_live_YOUR_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "url": "https://myshop.com/api/webhooks/asan",
     "events": ["order.created", "tracking.milestone_updated"]
   }'`,
-          node: `const sub = await fetch("https://api-core.asanshipping.com/api/v1/webhooks", {
+          node: `const sub = await fetch("https://merchant-api.asanshipping.com/api/v1/webhooks", {
   method: "POST",
   headers: {
     "Authorization": "Bearer as_live_YOUR_KEY",
@@ -945,12 +1186,12 @@ $result = json_decode(curl_exec($ch), true);
 });`,
           python: `import requests
 res = requests.post(
-    "https://api-core.asanshipping.com/api/v1/webhooks",
+    "https://merchant-api.asanshipping.com/api/v1/webhooks",
     headers={"Authorization": "Bearer as_live_YOUR_KEY"},
     json={"url": "https://myshop.com/api/webhooks/asan", "events": ["order.created"]}
 )`,
           php: `<?php
-$ch = curl_init("https://api-core.asanshipping.com/api/v1/webhooks");
+$ch = curl_init("https://merchant-api.asanshipping.com/api/v1/webhooks");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
     "url" => "https://myshop.com/api/webhooks/asan",

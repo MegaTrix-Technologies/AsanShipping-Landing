@@ -290,7 +290,7 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       <div class="cover-meta">
         <div>
           <div class="cover-meta-label">Environment Base URLs</div>
-          <div class="cover-meta-value" style="font-size: 7pt; font-family: 'JetBrains Mono';">https://api-core.asanshipping.com/api/v1</div>
+          <div class="cover-meta-value" style="font-size: 7pt; font-family: 'JetBrains Mono';">https://merchant-api.asanshipping.com/api/v1</div>
         </div>
         <div>
           <div class="cover-meta-label">Protocol & Auth</div>
@@ -325,7 +325,7 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       <tbody>
         <tr>
           <td><strong>Live Production</strong></td>
-          <td><code>https://api-core.asanshipping.com/api/v1</code></td>
+          <td><code>https://merchant-api.asanshipping.com/api/v1</code></td>
           <td>Production store integrations & live order processing</td>
         </tr>
         <tr>
@@ -583,11 +583,77 @@ const HTML_TEMPLATE = `<!DOCTYPE html>
       </div>
       <p>Cancel an unbooked order and automatically restock reserved items back to warehouse ledger.</p>
     </div>
+  <!-- ENDPOINT REFERENCE: LOCATIONS & ADDRESS READER -->
+  <div class="page-break">
+    <h1>5. Delivery Locations & Address Reader Tool</h1>
+
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <div><span class="badge badge-get">GET</span><span class="endpoint-path">/locations/cities</span></div>
+        <span class="endpoint-scope">Scope: locations:read / Storefront</span>
+      </div>
+      <p>Access all available Pakistani delivery cities, provinces, logistics tiers, and sub-area coverage zones. Ideal for checkout city dropdowns and destination validation.</p>
+      <pre>// Query Parameters: ?province=Punjab&search=lahore&includeAreas=true
+{
+  "success": true,
+  "data": [
+    {
+      "name": "Lahore",
+      "province": "Punjab",
+      "tier": "Tier 1",
+      "areasCount": 42,
+      "areas": ["Johar Town", "Gulberg", "DHA Phase 5", "Model Town", "Bahria Town"]
+    },
+    {
+      "name": "Karachi",
+      "province": "Sindh",
+      "tier": "Tier 1",
+      "areasCount": 56,
+      "areas": ["Clifton", "DHA Phase 6", "Gulshan-e-Iqbal", "North Nazimabad"]
+    }
+  ]
+}</pre>
+    </div>
+
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <div><span class="badge badge-post">POST</span><span class="endpoint-path">/tools/parse-address</span></div>
+        <span class="endpoint-scope">Scope: tools:execute / orders:write</span>
+      </div>
+      <p>Intelligently parse unstructured customer text into normalized Pakistani phone numbers (+923...), standardized delivery cities, sub-areas, and clean street addresses with confidence scoring. Supports single strings and high-speed bulk arrays (up to 100 items per request).</p>
+      <pre>// Request Body JSON (Single or Bulk)
+{
+  "addresses": [
+    "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+    "Fatima Tariq, +92 321 9876543, House 12, Gulshan-e-Iqbal, Karachi"
+  ]
+}
+
+// Response JSON
+{
+  "success": true,
+  "data": {
+    "results": [
+      {
+        "originalText": "Ali Khan, 0300-1234567, Flat 4B, Johar Town, lhr",
+        "detectedPhone": "03001234567",
+        "phoneNormalized": "+923001234567",
+        "detectedCity": "Lahore",
+        "detectedProvince": "Punjab",
+        "detectedSubArea": "Johar Town",
+        "cleanedStreetAddress": "Ali Khan, Flat 4B",
+        "confidence": { "city": 98, "subArea": 100, "phone": 100, "overall": 99 }
+      }
+    ],
+    "totalProcessed": 1
+  }
+}</pre>
+    </div>
   </div>
 
   <!-- ENDPOINT REFERENCE: TRACKING & WEBHOOKS -->
   <div class="page-break">
-    <h1>5. Public Tracking & Webhooks</h1>
+    <h1>6. Public Tracking & Webhooks</h1>
 
     <div class="endpoint-card">
       <div class="endpoint-header">
