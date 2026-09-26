@@ -19,7 +19,6 @@ export function Navbar({ onOpenConnectModal }: NavbarProps) {
     { href: "/#couriers", label: "Couriers" },
     { href: "/#pricing", label: "Pricing" },
     { href: "/articles", label: "Articles" },
-    { href: "/developers", label: "Developers" },
     { href: "/#faq", label: "FAQ" },
   ];
 

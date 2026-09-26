@@ -50,11 +50,6 @@ export function Footer({ onOpenVision, onOpenPrivacy, onOpenTerms }: FooterProps
                   <span>Articles &amp; Guides</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/developers" className="hover:text-primary transition-colors font-semibold text-emerald-500 flex items-center gap-1.5">
-                  <span>Developer API &amp; Docs</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
