@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, Sora, Orbitron } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ZanderioChat } from "@/components/ZanderioChat";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -98,7 +100,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className={`${manrope.variable} ${sora.variable} ${orbitron.variable}`}>
-      <body className="min-h-screen font-sans antialiased bg-background text-foreground transition-colors duration-300">
+      <body suppressHydrationWarning className="min-h-screen font-sans antialiased bg-background text-foreground transition-colors duration-300">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -106,7 +108,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           {children}
+          <ZanderioChat />
         </ThemeProvider>
+        <Script
+          src="https://cdn.zanderio.ai/widget/loader.js"
+          data-id="wdg_Y5N0bnPAlXZiu0favThanaMt"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );
