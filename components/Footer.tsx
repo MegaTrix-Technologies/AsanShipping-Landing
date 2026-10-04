@@ -13,6 +13,7 @@ interface FooterProps {
 
 export function Footer({ onOpenVision, onOpenPrivacy, onOpenTerms }: FooterProps) {
   const loginUrl = process.env.NEXT_PUBLIC_APP_LOGIN_URL || "https://web.asanshipping.com/login";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://asanshipping.com";
 
   return (
     <footer className="border-t border-border bg-card text-foreground relative overflow-hidden">
@@ -135,7 +136,7 @@ export function Footer({ onOpenVision, onOpenPrivacy, onOpenTerms }: FooterProps
             </ul>
           </div>
 
-          {/* Col 4: MegaTrix Branding & Copyright */}
+          {/* Col 4: MegaTrix Branding & Company Details */}
           <div className="space-y-4">
             {/*
               ─── MegaTrix Logo Lockup ───
@@ -203,15 +204,42 @@ export function Footer({ onOpenVision, onOpenPrivacy, onOpenTerms }: FooterProps
             </div>
 
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Pakistan&apos;s #1 AI-driven autonomous logistics control tower. Eliminating COD RTO losses for high-scale D2C brands.
+              Pakistan&apos;s #1 AI-driven autonomous logistics control tower.
+              <br />
+              Eliminating COD RTO losses for high-scale D2C brands.
             </p>
+
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Asan Shipping is a logistics SaaS platform developed and operated by MegaTrix Technologies (Private) Limited.
+            </p>
+
+            <div className="space-y-1.5 text-xs text-muted-foreground">
+              <div>
+                Support:{" "}
+                <a
+                  href="mailto:support@megatrixai.com"
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  support@megatrixai.com
+                </a>
+              </div>
+              <div>
+                Website:{" "}
+                <a
+                  href={siteUrl}
+                  className="text-foreground hover:text-primary transition-colors"
+                >
+                  Asan Shipping
+                </a>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-muted-foreground font-mono">
           <p>
-            A Product of <span className="font-bold text-foreground">MegaTrix Technologies (Private) Limited</span> &copy; 2026 &middot; All Rights Reserved
+            &copy; 2026 MegaTrix Technologies (Private) Limited &middot; All Rights Reserved
           </p>
           <div className="flex items-center gap-6">
             <button
